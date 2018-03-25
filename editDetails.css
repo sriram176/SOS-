@@ -1,0 +1,14 @@
+@import "afterLogIn.css";
+@import "addNominee.css";
+
+#password, #name, #nominee_1, #nominee_2, #nominee_3, #aadhar, #sub{
+  display: none;
+}
+
+#subbtn:hover{
+  margin-top: 1px;
+}
+
+#circle{
+  background-color: #4d4d4d;
+}

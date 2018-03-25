@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Map</title>
+  <!--<meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">-->
+  <link rel="stylesheet" href="map.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:300" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.ico" sizes="32x32" />
+</head>
+<body>
+  <div class="container">
+    <div class="banner_master">
+      <div class="span1">
+        <button id="logo" onclick="location.href = 'pro.php';">
+          <h2 id="txt">Emergency</h2>
+          <h2 id="txt">Services</h2>
+        </button>
+        <!--</div>
+
+        <div class="span2">-->
+        <button type="button" id="btn1" onclick="location.href = 'login.php';">Log In</button>
+        <button type="button" id="btn" onclick="location.href = 'signup.php';">Sign Up</button>
+      </div>
+    </div>
+      <button id = "btn3" onclick="getLocation()">Find My Location</button>
+      <button id = "btn4" onclick="GetLocation()">Hospitals</button>
+      <button id = "btn5" onclick="GetLocation_01()">Police Stations</button>
+      <button id = "btn6" onclick="GetLocation_02()">Fire Stations</button>
+    <!--    <p id="demo"></p>-->
+
+    <script>
+    var x = document.getElementById("demo");
+
+    function getLocation() {
+      window.scrollTo(100,100);
+      document.getElementById('btn4').style.visibility = "visible";
+      document.getElementById('btn6').style.visibility = "visible";
+      document.getElementById('btn5').style.visibility = "visible";
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    function showPosition(position) {
+      alert(""+position.coords.latitude+""+position.coords.longitude);
+      initMap(position.coords.latitude,position.coords.longitude);
+  }
+
+  function GetLocation() {
+    document.getElementById('btn4').style.visibility = "visible";
+    document.getElementById('btn6').style.visibility = "visible";
+    document.getElementById('btn5').style.visibility = "visible";
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(ShowPosition, showError);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function ShowPosition(position) {
+    /*x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;*/
+    hospital_marker(position.coords.latitude,position.coords.longitude);
+    /*else{
+    initMap(position.coords.latitude,position.coords.longitude);
+  }*/
+}
+
+function GetLocation_01() {
+  document.getElementById('btn4').style.visibility = "visible";
+  document.getElementById('btn6').style.visibility = "visible";
+  document.getElementById('btn5').style.visibility = "visible";
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(ShowPosition_01, showError);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function ShowPosition_01(position) {
+  /*x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;*/
+  police_marker(position.coords.latitude,position.coords.longitude);
+  /*else{
+  initMap(position.coords.latitude,position.coords.longitude);
+}*/
+}
+function GetLocation_02() {
+  document.getElementById('btn4').style.visibility = "visible";
+  document.getElementById('btn6').style.visibility = "visible";
+  document.getElementById('btn5').style.visibility = "visible";
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(ShowPosition_02, showError);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function ShowPosition_02(position) {
+  /*x.innerHTML = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;*/
+  fire_marker(position.coords.latitude,position.coords.longitude);
+  /*else{
+  initMap(position.coords.latitude,position.coords.longitude);
+}*/
+}
+
+function showError(error) {
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+    x.innerHTML = "User denied the request for Geolocation."
+    break;
+    case error.POSITION_UNAVAILABLE:
+    //x.innerHTML = "Location information is unavailable."
+    alert("Location information is unavailable.\nPlease Try Again");
+    getLocation();
+    break;
+    case error.TIMEOUT:
+    x.innerHTML = "The request to get user location timed out."
+    break;
+    case error.UNKNOWN_ERROR:
+    x.innerHTML = "An unknown error occurred."
+    break;
+  }
+}
+</script>
+
+<div id="map"></div>
+
+<script>
+var map;
+function initMap(l, lo) {
+  if(l != undefined){
+    var holy = {lat:l, lng:lo};
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: holy,
+      zoom: 18
+    });
+    var marker = new google.maps.Marker({
+      position:holy,
+      map: map
+    });
+  }
+  else{
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat:17.6868, lng:83.2185},
+      zoom: 8
+    });
+    /*var marker = new google.maps.Marker({
+      position:visakhapatnam,
+      map: map
+    });*/
+  }
+}
+
+function hospital_marker(l, lo){
+  var holy = {lat:l, lng:lo};
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: holy,
+    zoom: 18
+  });
+  var marker = new google.maps.Marker({
+    position:holy,
+    map: map
+  });
+  infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: holy,
+    radius: 500,
+    type: ['hospital']
+  }, callback);
+}
+
+function police_marker(l, lo){
+  var holy = {lat:l, lng:lo};
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: holy,
+    zoom: 15
+  });
+  var marker = new google.maps.Marker({
+    position:holy,
+    map: map
+  });
+  infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: holy,
+    radius: 5000,
+    type: ['police']
+  }, callback);
+}
+
+function fire_marker(l, lo){
+  var holy = {lat:l, lng:lo};
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: holy,
+    zoom: 13
+  });
+  var marker = new google.maps.Marker({
+    position:holy,
+    map: map
+  });
+  infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: holy,
+    radius: 5000,
+    type: ['fire_station']
+  }, callback);
+}
+
+function callback(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+}
+
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+
+  google.maps.event.addListener(marker, 'click', function() {
+    infowindow.setContent(place.name);
+    infowindow.open(map, this);
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJE9yPVtuUxUzBCSv8gPGKWQC2X0NpxjI&libraries=places&callback=initMap" async defer></script>
+</div>
+
+</body>
+</html>

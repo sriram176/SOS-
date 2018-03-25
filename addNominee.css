@@ -1,0 +1,9 @@
+@import "signup_css.css";
+
+.login_form{
+  height: 750px;
+}
+
+body{
+  height: 1200px;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="search.css">
+  <title>Search</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis:300" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.ico" sizes="32x32" />
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="banner_master">
+      <div class="span1">
+        <button id="logo" onclick="location.href = 'pro.php';">
+          <h2 id="txt">Emergency</h2>
+          <h2 id="txt">Services</h2>
+        </button>
+        <button type="button" id="btn1" onclick="location.href = 'login.php';">Log In</button>
+        <!--<button type="button" id="btn" onclick="location.href = 'login.php';">Sign Up</button>-->
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="question_area">
+      <br>
+      <center><h1>Symptom Checker</h1><center>
+        <br>
+        <br>
+        <img src ="sym1.jpeg">
+        <br>
+        <br>
+        <br>
+        <p>For help particularly on medical field follow the link below</p>
+        <br>
+        <br>
+        <center>
+          <button id="question_area_btn" onclick="window.open('https://www.mayoclinic.org/symptom-checker/select-symptom/itt-20009075')">CLICK HERE</button>
+        </center>
+
+      </div>
+      <div class="info_area">
+        <center>
+          <br>
+          <h1>Information</h1>
+          <div class="buttongrp">
+            <br>
+            <button type="button" id="_btn_1" onclick="location.href = 'requirments.html';"><img src="list.png" height="48px" width="48px"><br>Requirements</button>
+            <button type="button" id="_btn" onclick="location.href = 'med.html';"><img src="first-aid-kit.png" height="48px" width="48px"><br>Medical Tips</button><br><br>
+            <button type="button" id="_btn_2" onclick="location.href = 'life.html';"><img src="hand.png" height="48px" width="48px"><br>Danger</button>
+            <button type="button" id="_btn" onclick="location.href = 'bite.html';"><img src="bite.png" height="48px" width="48px"><br>Bites Stings</button>
+            <button type="button" id="_btn_1" onclick="location.href = 'bone.html';"><img src="knee.png" height="48px" width="48px"><br>Bone Joint</button><br><br>
+            <button type="button" id="_btn" onclick="location.href = 'wounds.html';"><img src="band-aid.png" height="48px" width="48px"><br>Wounds</button><br><br>
+            <button type="button" id="_btn" onclick="location.href = 'login.php';"><img src="stress.png" height="48px" width="48px"><br>Stress</button>
+            <button type="button" id="_btn_1" onclick="location.href = 'envi.html';"><img src="ecology.png" height="48px" width="48px"><br>Environmental</button>
+            <div>
+            </center>
+          </div>
+        </div>
+
+      </body>
+
+      <script>
+      function click_1(){
+
+        //need to work on transitions
+
+        if(document.getElementById("btn_1").value == "Yes"){
+          window.location.href = "http://localhost/ProjectSos/map1.html";
+        }
+
+        setTimeout(function(){
+          document.getElementById("question").innerHTML = "Would you like to access maps?"
+          document.getElementById("btn_1").value = "Yes";
+          document.getElementById("btn_2").value = "No";
+        },800);
+      }
+    </script>
+
+    </html>
